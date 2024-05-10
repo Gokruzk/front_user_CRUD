@@ -1,0 +1,5 @@
+1. Crear servicio para añadir usuario
+2. Crear servicio para actualizar usuario
+3. Crear servicio para eliminar usuario
+
+# Cada servicio se ejecutará en un botón, se envía la info se ejecuta el servicio en el1 onClick()
