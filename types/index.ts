@@ -13,9 +13,21 @@ export interface CustomButtonProps {
   style?: string;
 }
 
+export interface DeleteButtonProps {
+  title: string;
+  userid: string;
+  style?: string;
+}
+
+export interface UpdateButtonProps {
+  userid: string;
+  username: string;
+  email: string;
+}
+
 export interface User {
   _id: {
-    $oid: number;
+    $oid: string;
   };
   username: string;
   email: string;
@@ -25,6 +37,6 @@ export interface UserWithoutId extends Omit<User, "_id"> {}
 
 export interface Params {
   params: {
-    userId: number;
+    userId: string;
   };
 }

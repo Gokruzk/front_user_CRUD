@@ -1,36 +1,16 @@
-"use client"
+import React from "react";
 import { CustomButton, CustomLinkButton } from "@/components";
-import React, { useState, useEffect } from "react";
 import { Params } from "@/types";
-import { getUser } from "@/services/user_crud";
+import { getUser, editUser } from "@/services/user_crud";
 
 const UpdateUser = async ({ params: { userId } }: Params) => {
   const data = await getUser(userId);
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-
-  // const options = {
-  //   method: "PUT",
-  //   body: JSON.stringify({ username, email }),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // };
-  // const updateUser = async () => {
-  //   const res = await fetch(`http://127.0.0.1:5001/user/${userId}`, options);
-
-  //   if (res.ok) {
-  //     alert("User updated successfully");
-  //   } else {
-  //     alert("Error while updatng user");
-  //   }
-  // };
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Update User</h1>
-      <form className="w-full max-w-lg">
+      <form className="w-full max-w-lg" action={editUser}>
+        <input type="hidden" name="userid" value={userId} />
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -42,8 +22,7 @@ const UpdateUser = async ({ params: { userId } }: Params) => {
               type="text"
               placeholder="username"
               name="username"
-              value={data.username}
-              // onChange={(e) => setUsername(e.target.value)}
+              defaultValue={data.username}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -56,16 +35,13 @@ const UpdateUser = async ({ params: { userId } }: Params) => {
               type="email"
               placeholder="email"
               name="email"
-              value={data.email}
-              // onChange={(e) => setEmail(e.target.value)}
+              defaultValue={data.email}
             />
           </div>
         </div>
-        <CustomButton
-          title="Update"
-          style="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-greeb-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-          // handleClick={updateUser}
-        />
+        <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-greeb-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          Update
+        </button>
       </form>
       <CustomLinkButton
         title="Regresar"
