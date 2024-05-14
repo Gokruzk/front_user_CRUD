@@ -1,9 +1,42 @@
-"use client"
-import * as React from "react";
+"use client";
+import {
+  useMutation,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { CustomLinkButton } from "@/components";
-import { createUser } from "@/services/user_crud";
+import { User } from "@/types";
+import { addUser } from "@/api/userAPI";
 
-const AddUser = () => {
+const queryClient = new QueryClient();
+
+export default function AddUser() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CreateUser />
+    </QueryClientProvider>
+  );
+}
+
+function CreateUser() {
+  const createUser = async (formData: FormData) => {
+    const username = formData.get("username") as string;
+    const email = formData.get("email") as string;
+    const user = {
+      username: username,
+      email: email,
+    };
+
+    addProductMutation.mutate({
+      ...user,
+    });
+  };
+  const addProductMutation = useMutation({
+    mutationFn: addUser,
+    onSuccess: () => {
+      alert("User added");
+    },
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -53,6 +86,4 @@ const AddUser = () => {
       />
     </main>
   );
-};
-
-export default AddUser;
+}

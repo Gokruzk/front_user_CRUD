@@ -1,7 +1,7 @@
-import React from "react";
-import { CustomButton, CustomLinkButton } from "@/components";
+"use client"
+import { CustomLinkButton } from "@/components";
 import { Params } from "@/types";
-import { getUser, editUser } from "@/services/user_crud";
+import { getUser, editUser } from "@/api/userAPI";
 
 const UpdateUser = async ({ params: { userId } }: Params) => {
   const data = await getUser(userId);
@@ -53,5 +53,3 @@ const UpdateUser = async ({ params: { userId } }: Params) => {
 };
 
 export default UpdateUser;
-
-

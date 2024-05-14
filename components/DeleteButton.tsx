@@ -1,18 +1,12 @@
 import { DeleteButtonProps } from "@/types";
 import React from "react";
-import { removeUser } from "@/services/user_crud";
+import { removeUser } from "@/api/userAPI";
 
-const DeleteButton = ({
-    title,
-    userid,
-    style,
-}: DeleteButtonProps) => {
+const DeleteButton = ({ title, userid, style }: DeleteButtonProps) => {
   return (
     <form action={removeUser}>
       <input type="hidden" name="userid" value={userid} />
-      <button className={style}>
-        {title}
-      </button>
+      <button className={style}>{title}</button>
     </form>
   );
 };

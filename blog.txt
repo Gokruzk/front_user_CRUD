@@ -1,7 +1,0 @@
-2. Crear servicio para actualizar usuario
-
-3. Dinamismo al eliminar usuario
-    useEffect(), useState
-
-4. Visualizar usuarios en tiempo real
-    ReactQuery

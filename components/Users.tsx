@@ -1,24 +1,24 @@
-"use client";
-import { getUsers } from "@/api/userAPI";
-import { CustomLinkButton, DeleteButton, UserCard } from "@/components";
-import { User } from "@/types";
 import {
+  useQuery,
   QueryClient,
   QueryClientProvider,
-  useQuery,
 } from "@tanstack/react-query";
+import { User } from "@/types";
+import { getUsers } from "@/api/userAPI";
+import CustomLinkButton from "./CustomLinkButton";
+import DeleteButton from "./DeleteButton";
+import UserCard from "./UserCard";
 
 const queryClient = new QueryClient();
 
-export default function Userss() {
+export default function Users() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ViewUsers />
+      <Vuser />
     </QueryClientProvider>
   );
 }
-
-const ViewUsers = () => {
+export const Vuser = () => {
   const {
     isLoading,
     data: users,
@@ -28,23 +28,20 @@ const ViewUsers = () => {
     queryKey: ["users"],
     queryFn: getUsers,
     retry: 3,
-    retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30000),
-    refetchInterval: 2000, // Obtención en tiempo real cada 2 segundos
+    retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30000), // Demora exponencial entre reintentos
+    refetchInterval: 2000, // Obtención en tiempo real cada 5 segundos
   });
+
   if (isLoading) return <div>Loading...</div>;
   else if (isError) return <div>Error {error.message}</div>;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-10">
-      <h1>Users</h1>
-      <main className="flex items-center justify-between">
-        <div className="rounded overflow-hidden w-100">
-          {users.map((user: User) => {
-            return (
-              <div
-                className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-10"
-                key={user._id.$oid}
-              >
+    <main className="flex items-center justify-between">
+      <div className="rounded overflow-hidden w-100">
+        {users.map((user: User) => {
+          return (
+            <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-10">
+              <div key={user._id.$oid}>
                 <UserCard user={user} />
                 <div className="flex">
                   <div className="pr-1">
@@ -63,16 +60,10 @@ const ViewUsers = () => {
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </main>
-      {/* <Users /> */}
-      <CustomLinkButton
-        title="Regresar"
-        href="/"
-        style="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      />
+            </div>
+          );
+        })}
+      </div>
     </main>
   );
 };
