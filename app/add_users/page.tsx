@@ -1,15 +1,9 @@
+"use client"
 import * as React from "react";
 import { CustomLinkButton } from "@/components";
-import { addUser } from "@/services/user_crud";
+import { createUser } from "@/services/user_crud";
 
 const AddUser = () => {
-  const createUser = async (formData: FormData) => {
-    "use server";
-    const username = formData.get("username") as string;
-    const email = formData.get("email") as string;
-    console.log(username, email);
-    addUser({ username, email });
-  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

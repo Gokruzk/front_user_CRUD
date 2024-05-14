@@ -1,4 +1,6 @@
+"use server";
 import { UserWithoutId } from "@/types";
+import { redirect } from "next/navigation";
 
 // get users
 export const getUsers = async () => {
@@ -30,6 +32,13 @@ export const addUser = async ({ username, email }: UserWithoutId) => {
   } else {
     alert("Error while adding user");
   }
+};
+
+export const createUser = async (formData: FormData) => {
+  const username = formData.get("username") as string;
+  const email = formData.get("email") as string;
+  addUser({ username, email });
+  redirect("/view_users")
 };
 
 // delete
