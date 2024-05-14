@@ -38,11 +38,11 @@ export const createUser = async (formData: FormData) => {
   const username = formData.get("username") as string;
   const email = formData.get("email") as string;
   addUser({ username, email });
-  redirect("/view_users")
+  redirect("/view_users");
 };
 
 // delete
-export const deleteUser = async (id: number) => {
+export const deleteUser = async (id: string) => {
   const options = {
     method: "DELETE",
     headers: {
@@ -56,4 +56,9 @@ export const deleteUser = async (id: number) => {
   } else {
     alert("Error while deleting user");
   }
+};
+
+export const removeUser = async (formData: FormData) => {
+  const userid = formData.get("userid") as string;
+  deleteUser(userid);
 };

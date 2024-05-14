@@ -1,7 +1,11 @@
 import React from "react";
 import { User } from "@/types";
-import { CustomLinkButton, CustomButton, UserCard } from "@/components";
-import { getUsers, deleteUser } from "@/services/user_crud";
+import {
+  CustomLinkButton,
+  UserCard,
+  DeleteButton,
+} from "@/components";
+import { getUsers } from "@/services/user_crud";
 
 const ViewUsers = async () => {
   const data = await getUsers();
@@ -23,9 +27,9 @@ const ViewUsers = async () => {
                     />
                   </div>
                   <div>
-                    <CustomButton
+                    <DeleteButton
                       title="Delete"
-                      handleClick={(e: any) => deleteUser(user._id.$oid)}
+                      userid={user._id.$oid}
                       style="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     />
                   </div>
