@@ -1,14 +1,15 @@
 import { CustomLinkButtonProps } from "@/types";
 import React from "react";
 import Link from "next/link";
+import { styleText } from "util";
 
-const CustomLinkButton = ({ title, href }: CustomLinkButtonProps) => {
+const CustomLinkButton = ({ title, href, style }: CustomLinkButtonProps) => {
   return (
     <Link href={href}>
       <button
         disabled={false}
         type={"button"}
-        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
+        className={style}
       >
         {title}
       </button>
