@@ -30,5 +30,5 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## API
-This frontend use this [API]([https://nextjs.org/learn](https://github.com/Gokruzk/flask_users_register.git))
+This frontend use this [API](https://github.com/Gokruzk/flask_users_register.git)
 
